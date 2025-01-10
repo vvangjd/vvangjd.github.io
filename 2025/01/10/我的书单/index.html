@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="小鼎哥">
+
+
+
+    <meta name="description" content="你好，我是王教鼎。这是我记录学习和生活的博客，如果还能帮到你就再好不过了。">
+
+
+
+<title>我的书单 | 小鼎哥の博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小鼎哥の博客</a></div>
+            <div class="menu navbar-right">
+                <input id="search-input" type="text" placeholder="搜索文章..." autocomplete="off" />
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小鼎哥の博客</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    // 添加搜索功能
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('search-input');
+        // var searchBtn = document.createElement('button');
+        // searchBtn.id = 'search-btn';
+        // searchBtn.textContent = '搜索';
+        // searchInput.parentNode.insertBefore(searchBtn, searchInput.nextSibling);
+
+        var searchResults = document.createElement('div');
+        searchResults.id = 'search-results';
+        searchResults.style.display = 'none';
+        searchResults.style.position = 'absolute';
+        searchResults.style.zIndex = '1000';
+        searchResults.style.backgroundColor = 'var(--bg-color)';
+        searchResults.style.border = '1px solid var(--border-color)';
+        searchResults.style.borderRadius = '4px';
+        searchResults.style.padding = '10px';
+        searchResults.style.maxHeight = '400px';
+        searchResults.style.overflowY = 'auto';
+        searchResults.style.width = '300px';
+        searchInput.parentNode.appendChild(searchResults);
+
+        var searchData = [];
+
+        // 加载搜索数据
+        fetch('/search.xml')
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then(data => {
+                searchData = Array.from(data.getElementsByTagName('entry')).map(entry => ({
+                    title: entry.getElementsByTagName('title')[0].textContent,
+                    url: entry.getElementsByTagName('url')[0].textContent,
+                    content: entry.getElementsByTagName('content')[0].textContent
+                }));
+            });
+
+        // 搜索处理
+        function performSearch() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (keyword.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const results = searchData.filter(item => 
+                item.title.toLowerCase().includes(keyword) || 
+                item.content.toLowerCase().includes(keyword)
+            ).slice(0, 10); // 限制显示前10条结果
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.map(item => `
+                    <div class="search-result-item">
+                        <a href="${item.url}">${item.title}</a>
+                    </div>
+                `).join('');
+                searchResults.style.display = 'block';
+
+                const inputRect = searchInput.getBoundingClientRect();
+                searchResults.style.top = inputRect.bottom + window.scrollY + 'px';
+                searchResults.style.left = inputRect.left + window.scrollX + 'px';
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">没有找到相关文章</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+
+        searchInput.addEventListener('input', performSearch);
+        searchBtn.addEventListener('click', performSearch);
+
+        // 点击其他地方关闭搜索结果
+        document.addEventListener('click', function(e) {
+            if (!searchResults.contains(e.target) && e.target !== searchInput && e.target !== searchBtn) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // 按下回车键触发搜索
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    });
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">全部展开</a>
+        <a onclick="go_top()">回到顶部</a>
+        <a onclick="go_bottom()">前往底部</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? '全部展开' : '全部折叠';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">我的书单</h1>
+            
+                <div class="post-meta">
+                    
+                        作者: <a itemprop="author" rel="author" href="/">小鼎哥</a>
+                    
+
+                    
+                        <span class="post-time">
+                        日期: <a href="#">2025-01-10&nbsp;&nbsp;18:10:39</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                        分类:
+                            
+                                <a href="/categories/%E9%98%85%E8%AF%BB/">阅读</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <!-- >&nbsp;**提醒1：**只收录看过的，并在豆瓣上给予5星的书
+>&nbsp;**提醒2：**不定期更新 -->
+<h2 id="治愈系"><a href="#治愈系" class="headerlink" title="治愈系"></a>治愈系</h2><div class="gallery">
+  <a href="/img/booklist/人生借阅室.png" target="_blank">
+    <img src="/img/booklist/人生借阅室.png" alt="人生借阅室" style="width:500px; margin:28px;">
+  </a>
+  <a href="/img/booklist/小说-解忧杂货店.png" target="_blank">
+    <img src="/img/booklist/小说-解忧杂货店.png" alt="解忧杂货店" style="width:500px; margin:28px;">
+  </a>
+  <a href="/img/booklist/小巷人家.png" target="_blank">
+    <img src="/img/booklist/小巷人家.png" alt="小巷人家" style="width:500px; margin:28px;">
+  </a>
+</div>
+
+<h2 id="现实主义"><a href="#现实主义" class="headerlink" title="现实主义"></a>现实主义</h2><div class="gallery">
+  <a href="/img/booklist/小说-平凡的世界.png" target="_blank">
+    <img src="/img/booklist/小说-平凡的世界.png" alt="平凡的世界" style="width:500px; margin:28px;">
+  </a>
+  <a href="/img/booklist/小说-陆犯焉识.png" target="_blank">
+    <img src="/img/booklist/小说-陆犯焉识.png" alt="陆犯焉识" style="width:500px; margin:28px;">
+  </a>
+  <a href="/img/booklist/穆斯林的葬礼.png" target="_blank">
+    <img src="/img/booklist/穆斯林的葬礼.png" alt="穆斯林的葬礼" style="width:500px; margin:28px;">
+  </a>
+</div>
+
+<h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><div class="gallery">
+  <a href="/img/booklist/历史-大明王朝1566.png" target="_blank">
+    <img src="/img/booklist/历史-大明王朝1566.png" alt="大明王朝1566" style="width:500px; margin:28px;">
+  </a>
+</div>
+
+<h2 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h2><div class="gallery">
+  <a href="/img/booklist/推理-白夜行.png" target="_blank">
+    <img src="/img/booklist/推理-白夜行.png" alt="白夜行" style="width:500px; margin:28px;">
+  </a>
+  <a href="/img/booklist/推理-绝叫.png" target="_blank">
+    <img src="/img/booklist/推理-绝叫.png" alt="绝叫" style="width:500px; margin:28px;">
+  </a>
+</div>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>作者:</span>
+                        <span>小鼎哥</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>许可:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                <!-- 
+                     <p class="copyright-item">
+                         <span>口号:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                 -->
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>标签:</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%B9%A6%E5%8D%95/"># 书单</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">返回</a>
+                <span>· </span>
+                <a href="/">主页</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/01/09/CentOS-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACg++/">CentOS-7安装高版本g++</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <!-- <span>© 小鼎哥 <span class="heart">♥️</span> | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span> -->
+        <span> 小鼎哥 <span class="heart">♥️</span> <span>中国 · 杭州</span>
+    </div>
+    <style>
+        .heart {
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(0.7); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.7); }
+        }
+    </style>
+</footer>
+
+    </div>
+</body>
+
+</html>

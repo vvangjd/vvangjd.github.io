@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="小鼎哥">
+
+
+
+    <meta name="description" content="你好，我是王教鼎。这是我记录学习和生活的博客，如果还能帮到你就再好不过了。">
+
+
+
+<title>Tag: Plugin | 小鼎哥の博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">小鼎哥の博客</a></div>
+            <div class="menu navbar-right">
+                <input id="search-input" type="text" placeholder="搜索文章..." autocomplete="off" />
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">小鼎哥の博客</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+
+    // 添加搜索功能
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchInput = document.getElementById('search-input');
+        // var searchBtn = document.createElement('button');
+        // searchBtn.id = 'search-btn';
+        // searchBtn.textContent = '搜索';
+        // searchInput.parentNode.insertBefore(searchBtn, searchInput.nextSibling);
+
+        var searchResults = document.createElement('div');
+        searchResults.id = 'search-results';
+        searchResults.style.display = 'none';
+        searchResults.style.position = 'absolute';
+        searchResults.style.zIndex = '1000';
+        searchResults.style.backgroundColor = 'var(--bg-color)';
+        searchResults.style.border = '1px solid var(--border-color)';
+        searchResults.style.borderRadius = '4px';
+        searchResults.style.padding = '10px';
+        searchResults.style.maxHeight = '400px';
+        searchResults.style.overflowY = 'auto';
+        searchResults.style.width = '300px';
+        searchInput.parentNode.appendChild(searchResults);
+
+        var searchData = [];
+
+        // 加载搜索数据
+        fetch('/search.xml')
+            .then(response => response.text())
+            .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then(data => {
+                searchData = Array.from(data.getElementsByTagName('entry')).map(entry => ({
+                    title: entry.getElementsByTagName('title')[0].textContent,
+                    url: entry.getElementsByTagName('url')[0].textContent,
+                    content: entry.getElementsByTagName('content')[0].textContent
+                }));
+            });
+
+        // 搜索处理
+        function performSearch() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            if (keyword.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const results = searchData.filter(item => 
+                item.title.toLowerCase().includes(keyword) || 
+                item.content.toLowerCase().includes(keyword)
+            ).slice(0, 10); // 限制显示前10条结果
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.map(item => `
+                    <div class="search-result-item">
+                        <a href="${item.url}">${item.title}</a>
+                    </div>
+                `).join('');
+                searchResults.style.display = 'block';
+
+                const inputRect = searchInput.getBoundingClientRect();
+                searchResults.style.top = inputRect.bottom + window.scrollY + 'px';
+                searchResults.style.left = inputRect.left + window.scrollX + 'px';
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">没有找到相关文章</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+
+        searchInput.addEventListener('input', performSearch);
+        searchBtn.addEventListener('click', performSearch);
+
+        // 点击其他地方关闭搜索结果
+        document.addEventListener('click', function(e) {
+            if (!searchResults.contains(e.target) && e.target !== searchInput && e.target !== searchBtn) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // 按下回车键触发搜索
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    });
+</script>
+            <div class="main">
+                
+
+    
+<div class="container">
+    <div class="post-wrap tags">
+        <h2 class="post-title">-&nbsp;Plugin&nbsp;-</h2>
+    </div>
+    <div class="post-wrap archive">
+    
+    
+        
+
+        
+            <h3>2024</h3>
+        
+
+        <article class="archive-item">
+            <a class="archive-item-link" href="/2024/08/02/JetBrains-IDEs-%E6%97%A0%E9%99%90%E9%87%8D%E7%BD%AE%E8%AF%95%E7%94%A8%E6%9C%9F/">JetBrains IDEs无限重置试用期</a>
+            <span class="archive-item-date">2024-08-02</span>
+        </article>
+    
+    
+</div>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <!-- <span>© 小鼎哥 <span class="heart">♥️</span> | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span> -->
+        <span> 小鼎哥 <span class="heart">♥️</span> <span>中国 · 杭州</span>
+    </div>
+    <style>
+        .heart {
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(0.7); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.7); }
+        }
+    </style>
+</footer>
+
+    </div>
+</body>
+
+</html>

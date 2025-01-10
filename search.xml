@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>我的书单</title>
+      <link href="/2025/01/10/%E6%88%91%E7%9A%84%E4%B9%A6%E5%8D%95/"/>
+      <url>/2025/01/10/%E6%88%91%E7%9A%84%E4%B9%A6%E5%8D%95/</url>
+      
+        <content type="html"><![CDATA[<!-- >&nbsp;**提醒1：**只收录看过的，并在豆瓣上给予5星的书>&nbsp;**提醒2：**不定期更新 --><h2 id="治愈系"><a href="#治愈系" class="headerlink" title="治愈系"></a>治愈系</h2><div class="gallery">  <a href="/img/booklist/人生借阅室.png" target="_blank">    <img src="/img/booklist/人生借阅室.png" alt="人生借阅室" style="width:500px; margin:28px;">  </a>  <a href="/img/booklist/小说-解忧杂货店.png" target="_blank">    <img src="/img/booklist/小说-解忧杂货店.png" alt="解忧杂货店" style="width:500px; margin:28px;">  </a>  <a href="/img/booklist/小巷人家.png" target="_blank">    <img src="/img/booklist/小巷人家.png" alt="小巷人家" style="width:500px; margin:28px;">  </a></div><h2 id="现实主义"><a href="#现实主义" class="headerlink" title="现实主义"></a>现实主义</h2><div class="gallery">  <a href="/img/booklist/小说-平凡的世界.png" target="_blank">    <img src="/img/booklist/小说-平凡的世界.png" alt="平凡的世界" style="width:500px; margin:28px;">  </a>  <a href="/img/booklist/小说-陆犯焉识.png" target="_blank">    <img src="/img/booklist/小说-陆犯焉识.png" alt="陆犯焉识" style="width:500px; margin:28px;">  </a>  <a href="/img/booklist/穆斯林的葬礼.png" target="_blank">    <img src="/img/booklist/穆斯林的葬礼.png" alt="穆斯林的葬礼" style="width:500px; margin:28px;">  </a></div><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><div class="gallery">  <a href="/img/booklist/历史-大明王朝1566.png" target="_blank">    <img src="/img/booklist/历史-大明王朝1566.png" alt="大明王朝1566" style="width:500px; margin:28px;">  </a></div><h2 id="推理"><a href="#推理" class="headerlink" title="推理"></a>推理</h2><div class="gallery">  <a href="/img/booklist/推理-白夜行.png" target="_blank">    <img src="/img/booklist/推理-白夜行.png" alt="白夜行" style="width:500px; margin:28px;">  </a>  <a href="/img/booklist/推理-绝叫.png" target="_blank">    <img src="/img/booklist/推理-绝叫.png" alt="绝叫" style="width:500px; margin:28px;">  </a></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 阅读 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 书单 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CentOS-7安装高版本g++</title>
+      <link href="/2025/01/09/CentOS-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACg++/"/>
+      <url>/2025/01/09/CentOS-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACg++/</url>
+      
+        <content type="html"><![CDATA[<h2 id="安装SCL源"><a href="#安装SCL源" class="headerlink" title="安装SCL源"></a>安装SCL源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install centos-release-scl</span><br></pre></td></tr></table></figure><h2 id="替换SCL源"><a href="#替换SCL源" class="headerlink" title="替换SCL源"></a>替换SCL源</h2><p>CentOS 7的SCL源在2024.6.30日停止维护，<br>所以需要将SCL源里面的CentOS官方地址改为阿里云</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl.repo CentOS-SCLo-scl.repo.bak</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl-rh.repo CentOS-SCLo-scl-rh.repo.bak</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim CentOS-SCLo-rh.repo</span><br></pre></td></tr></table></figure><p>粘贴以下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[centos-sclo-rh]</span><br><span class="line">name=CentOS-7 - SCLo rh</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo</span><br></pre></td></tr></table></figure><p>执行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure><h2 id="安装devtoolset-9"><a href="#安装devtoolset-9" class="headerlink" title="安装devtoolset-9"></a>安装devtoolset-9</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install devtoolset-9</span><br></pre></td></tr></table></figure><h2 id="激活devtoolset"><a href="#激活devtoolset" class="headerlink" title="激活devtoolset"></a>激活devtoolset</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 ~/.bash_profile，在文件尾部添加如下命令</span></span><br><span class="line"><span class="built_in">source</span> /opt/rh/devtoolset-9/enable</span><br></pre></td></tr></table></figure><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure><h2 id="确认是否安装成功"><a href="#确认是否安装成功" class="headerlink" title="确认是否安装成功"></a>确认是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -v</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CentOS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CentOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CentOS-7安装高版本Git</title>
+      <link href="/2025/01/09/CentOS-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACGit/"/>
+      <url>/2025/01/09/CentOS-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACGit/</url>
+      
+        <content type="html"><![CDATA[<h2 id="移除旧版本"><a href="#移除旧版本" class="headerlink" title="移除旧版本"></a>移除旧版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure><h2 id="安装End-Point-Package-Repository"><a href="#安装End-Point-Package-Repository" class="headerlink" title="安装End Point Package Repository"></a>安装End Point Package Repository</h2><p>在CentOS 7上安装最新Git最快的方法是通过End Point库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm</span><br></pre></td></tr></table></figure><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y git</span><br></pre></td></tr></table></figure><h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CentOS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CentOS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JetBrains IDEs无限重置试用期</title>
+      <link href="/2024/08/02/JetBrains-IDEs-%E6%97%A0%E9%99%90%E9%87%8D%E7%BD%AE%E8%AF%95%E7%94%A8%E6%9C%9F/"/>
+      <url>/2024/08/02/JetBrains-IDEs-%E6%97%A0%E9%99%90%E9%87%8D%E7%BD%AE%E8%AF%95%E7%94%A8%E6%9C%9F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JetBrains系列IDE都是非常好的软件，在未注册情况下有30天试用期。</p><h2 id="无限重置试用期"><a href="#无限重置试用期" class="headerlink" title="无限重置试用期"></a>无限重置试用期</h2><p>通过无限重置试用期达到永久使用的体验，以Pycharm举例</p><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>Pycharm：<a href="https://www.jetbrains.com/pycharm/">https://www.jetbrains.com/pycharm/</a><br>仓库地址：<a href="https://plugins.zhile.io/">https://plugins.zhile.io</a></p><h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><ol><li>打开 Pycharm，点击 Plugins，再点击界面右上角“设置”，见下图：</li></ol><p><img src="/../img/%E7%AC%AC1%E6%AD%A5.png" alt="第1步" title="first"></p><ol start="2"><li>选择 Manage Plugin Repositories，见下图：</li></ol><p><img src="/../img/%E7%AC%AC2%E6%AD%A5.png" alt="第2步" title="second"></p><ol start="3"><li>点击 “+” 将上文提到的仓库地址复制粘贴进去，再点击 OK，见下图：</li></ol><p><img src="/../img/%E7%AC%AC3%E6%AD%A5.png" alt="第3步" title="third"></p><ol start="4"><li>在 Markeplace 页签 输入 “IDE Eval Reset” 点击 Install，见下图：</li></ol><p><img src="/../img/%E7%AC%AC4%E6%AD%A5.png" alt="第4步" title="fourth"></p><p>安装完后重启 IDE 即可。</p><p>备注：该插件适合MacOS 和 Windows系统</p><p>完。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Plugin </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Plugin </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
