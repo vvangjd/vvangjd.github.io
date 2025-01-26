@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="王教鼎">
+
+
+
+
+
+<title>王教鼎の博客</title>
+
+
+
+    <link rel="icon" href="/WechatIMG5.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">王教鼎の博客</a></div>
+            <div class="menu navbar-right">
+                <input type="text" class="search-box" id="search-box" placeholder="搜索文章...">
+                <div id="search-results" class="search-results"></div>
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">王教鼎の博客</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">文章</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+<!-- filepath: /Users/wangjd/blog/blog/themes/Chic/layout/_partial/header.ejs -->
+<script src="/search.xml" type="text/javascript"></script>
+<script>
+    document.getElementById('search-box').addEventListener('input', function() {
+        var query = this.value.toLowerCase();
+        var resultsContainer = document.getElementById('search-results');
+        resultsContainer.innerHTML = '';
+
+        if (query.length > 2) {
+            fetch('/search.xml')
+                .then(response => response.text())
+                .then(str => (new window.DOMParser()).parseFromString(str, 'text/xml'))
+                .then(data => {
+                    var entries = data.getElementsByTagName('entry');
+                    for (var i = 0; i < entries.length; i++) {
+                        var title = entries[i].getElementsByTagName('title')[0].textContent;
+                        var content = entries[i].getElementsByTagName('content')[0].textContent;
+                        var url = entries[i].getElementsByTagName('url')[0].textContent;
+
+                        if (title.toLowerCase().includes(query) || content.toLowerCase().includes(query)) {
+                            var item = document.createElement('div');
+                            item.className = 'search-result-item';
+                            item.innerHTML = '<a href="' + url + '">' + title + '</a>';
+                            resultsContainer.appendChild(item);
+                        }
+                    }
+                });
+        }
+    });
+</script>
+            <div class="main">
+                
+    <div class="container profile-container">
+    <div class="intro">
+        <div class="avatar">
+            <a href="/"><img src="/image/WechatIMG5.jpg"></a>
+        </div>
+        <div class="nickname"></div>
+        <div class="description"><p>欢迎来到我的博客，这里记录了我的学习笔记、技术分享和生活点滴。希望你能在这里找到有用的信息，并享受阅读的过程。<br> Welcome to my blog, where I record my study notes, technical sharing, and life bits. I hope you find useful information here and enjoy the reading process.</p>
+</div>
+        <div class="links">
+            
+                
+                    <a class="link-item" title="Blog" href="/archives">
+                        
+                        
+                            <i class="iconfont icon-blog"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="Github" target="_blank" rel="noopener" href="https://github.com/vvangjd">
+                        
+                        
+                            <i class="iconfont icon-github"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="youxiang" href="mailto:vvangjd@gmail.com">
+                        
+                        
+                            <i class="iconfont icon-youxiang"></i>
+                        
+                    </a>
+                
+            
+        </div>
+    </div>
+</div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>王教鼎</span>
+        <span class="heartbeat">❤️</span>
+        <span>中国 · 杭州</span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
