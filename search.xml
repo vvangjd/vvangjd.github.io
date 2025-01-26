@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello Wangjd</title>
-    <url>/2025/01/26/hello-wangjd/</url>
-    <content><![CDATA[<h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><p>这是标题2</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>test-1</category>
-      </categories>
-      <tags>
-        <tag>test-2</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Centos-7安装高版本g++</title>
     <url>/2025/01/27/Centos-7%E5%AE%89%E8%A3%85%E9%AB%98%E7%89%88%E6%9C%ACg++/</url>
     <content><![CDATA[<h2 id="替换yum为阿里云"><a href="#替换yum为阿里云" class="headerlink" title="替换yum为阿里云"></a>替换yum为阿里云</h2><p>如果是纯净的Centos环境，需要先替换yum源</p>
@@ -47,6 +35,18 @@
       </categories>
       <tags>
         <tag>g++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello Wangjd</title>
+    <url>/2025/01/26/hello-wangjd/</url>
+    <content><![CDATA[<h2 id="标题2"><a href="#标题2" class="headerlink" title="标题2"></a>标题2</h2><p>这是标题2</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Hello World\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>test-1</category>
+      </categories>
+      <tags>
+        <tag>test-2</tag>
       </tags>
   </entry>
   <entry>
