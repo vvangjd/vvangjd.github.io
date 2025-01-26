@@ -74,13 +74,13 @@
       </tags>
   </entry>
   <entry>
-    <title>tag</title>
-    <url>/tag/index.html</url>
+    <title>category</title>
+    <url>/category/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>category</title>
-    <url>/category/index.html</url>
+    <title>tag</title>
+    <url>/tag/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
