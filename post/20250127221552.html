@@ -13,7 +13,7 @@
 
 
 
-<title>Centos-7安装高版本g++ | 王教鼎の博客</title>
+<title>Centos-7安装高版本git | 王教鼎の博客</title>
 
 
 
@@ -225,7 +225,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Centos-7安装高版本g++</h1>
+            <h1 class="post-title">Centos-7安装高版本git</h1>
             
                 <div class="post-meta">
                     
@@ -234,7 +234,7 @@
 
                     
                         <span class="post-time">
-                        日期: <a href="#">2025-01-27&nbsp;&nbsp;22:09:58</a>
+                        日期: <a href="#">2025-01-27&nbsp;&nbsp;22:15:52</a>
                         </span>
                     
                     
@@ -250,33 +250,16 @@
         </header>
 
         <div class="post-content">
-            <h2 id="替换yum为阿里云"><a href="#替换yum为阿里云" class="headerlink" title="替换yum为阿里云"></a>替换yum为阿里云</h2><p>如果是纯净的Centos环境，需要先替换yum源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+            <h2 id="移除旧版本"><a href="#移除旧版本" class="headerlink" title="移除旧版本"></a>移除旧版本</h2><p>如果没安装过git，这步可以省略</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br><span class="line">yum remove git-*</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装SCL源"><a href="#安装SCL源" class="headerlink" title="安装SCL源"></a>安装SCL源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y centos-release-scl</span><br></pre></td></tr></table></figure>
+<h2 id="安装End-Point-Package-Repositor"><a href="#安装End-Point-Package-Repositor" class="headerlink" title="安装End Point Package Repositor"></a>安装End Point Package Repositor</h2><p>在CentOS 7上安装最新git最快的方法是通过End Point库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm</span><br></pre></td></tr></table></figure>
 
-<h2 id="替换SCL源"><a href="#替换SCL源" class="headerlink" title="替换SCL源"></a>替换SCL源</h2><p>CentOS-7的SCL源在2024.6.30日停止维护，<br>所以需要将SCL源里面的CentOS官方地址改为阿里云</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl.repo CentOS-SCLo-scl.repo.bak</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl-rh.repo CentOS-SCLo-scl-rh.repo.bak</span><br></pre></td></tr></table></figure>
+<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim CentOS-SCLo-rh.repo</span><br></pre></td></tr></table></figure>
+<h2 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure>
 
-<p>粘贴以下内容</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[centos-sclo-rh]</span><br><span class="line">name=CentOS-7 - SCLo rh</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo</span><br></pre></td></tr></table></figure>
-
-<p>重新加载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装devtoolset-11"><a href="#安装devtoolset-11" class="headerlink" title="安装devtoolset-11"></a>安装devtoolset-11</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y devtoolset-11-gcc*</span><br></pre></td></tr></table></figure>
-
-<h2 id="临时激活devtoolset"><a href="#临时激活devtoolset" class="headerlink" title="临时激活devtoolset"></a>临时激活devtoolset</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-11 bash</span><br></pre></td></tr></table></figure>
-
-<h2 id="永久激活软链接"><a href="#永久激活软链接" class="headerlink" title="永久激活软链接"></a>永久激活软链接</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/g++ /usr/bin/g++</span><br><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/gcc /usr/bin/gcc</span><br></pre></td></tr></table></figure>
-
-<h2 id="确认是否安装成功"><a href="#确认是否安装成功" class="headerlink" title="确认是否安装成功"></a>确认是否安装成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在使用VSCode作为代码编辑器时，可能在<code>#include &lt;iostream&gt;</code>等头文件下方出现红色波浪线，<br>这是因为编辑器找不到g++的路径导致的。</p>
-<p>解决方法：<br>Mac: command + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入<br>Win: Ctrl + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/g++</span><br></pre></td></tr></table></figure>
         </div>
 
         
@@ -290,7 +273,7 @@
                 
                     <p class="copyright-item">
                         <span>永久链接:</span>
-                        <span><a href="https://wangjiaoding.com/post/20250127220958.html">https://wangjiaoding.com/post/20250127220958.html</a></span>
+                        <span><a href="https://wangjiaoding.com/post/20250127221552.html">https://wangjiaoding.com/post/20250127221552.html</a></span>
                     </p>
                 
                 
@@ -322,8 +305,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/post/20250127221552.html">Centos-7安装高版本git</a>
+                <a class="prev" rel="prev" href="/post/20250127221657.html">github部署hexo博客categories出现404</a>
             
+            
+            <a class="next" rel="next" href="/post/20250127220958.html">Centos-7安装高版本g++</a>
             
         </section>
 
