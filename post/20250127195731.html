@@ -122,15 +122,15 @@
     }
 </script>
 
-<!-- filepath: /Users/wangjd/blog/blog/themes/Chic/layout/_partial/header.ejs -->
+<!-- 搜索框搜索功能 -->
 <script src="/search.xml" type="text/javascript"></script>
 <script>
     document.getElementById('search-box').addEventListener('input', function() {
-        var query = this.value.toLowerCase();
+        var query = this.value.trim().toLowerCase();
         var resultsContainer = document.getElementById('search-results');
         resultsContainer.innerHTML = '';
 
-        if (query.length > 2) {
+        if (query.length > 0) {
             fetch('/search.xml')
                 .then(response => response.text())
                 .then(str => (new window.DOMParser()).parseFromString(str, 'text/xml'))
@@ -234,7 +234,7 @@
 
                     
                         <span class="post-time">
-                        日期: <a href="#">2025-01-27&nbsp;&nbsp;0:12:29</a>
+                        日期: <a href="#">2025-01-27&nbsp;&nbsp;19:57:31</a>
                         </span>
                     
                     
@@ -290,7 +290,7 @@
                 
                     <p class="copyright-item">
                         <span>永久链接:</span>
-                        <span><a href="https://wangjiaoding.com/post/20250127001229.html">https://wangjiaoding.com/post/20250127001229.html</a></span>
+                        <span><a href="https://wangjiaoding.com/post/20250127195731.html">https://wangjiaoding.com/post/20250127195731.html</a></span>
                     </p>
                 
                 
@@ -322,8 +322,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/post/20250127122510.html">Centos-7安装高版本git</a>
             
+            <a class="next" rel="next" href="/post/20250127131844.html">github部署Hexo博客categories出现404</a>
             
         </section>
 
@@ -339,7 +339,6 @@
         <span>中国 · 杭州</span>
     </div>
 </footer>
-
     </div>
 </body>
 

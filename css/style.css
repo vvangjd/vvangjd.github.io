@@ -1392,6 +1392,21 @@ header label {
   -ms-user-select: none;
   -khtml-user-select: none;
 }
+.post-content img {
+  max-width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.post-content img:hover {
+  transform: scale(2);
+}
+.post-content .small-img {
+  width: 50%;
+}
 @-moz-keyframes heartbeat {
   0%, 100% {
     transform: scale(1);

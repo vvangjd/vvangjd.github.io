@@ -122,15 +122,15 @@
     }
 </script>
 
-<!-- filepath: /Users/wangjd/blog/blog/themes/Chic/layout/_partial/header.ejs -->
+<!-- 搜索框搜索功能 -->
 <script src="/search.xml" type="text/javascript"></script>
 <script>
     document.getElementById('search-box').addEventListener('input', function() {
-        var query = this.value.toLowerCase();
+        var query = this.value.trim().toLowerCase();
         var resultsContainer = document.getElementById('search-results');
         resultsContainer.innerHTML = '';
 
-        if (query.length > 2) {
+        if (query.length > 0) {
             fetch('/search.xml')
                 .then(response => response.text())
                 .then(str => (new window.DOMParser()).parseFromString(str, 'text/xml'))
@@ -163,6 +163,15 @@
         
 
         <article class="archive-item">
+            <a class="archive-item-link" href="/post/20250127195731.html">Centos-7安装高版本g++</a>
+            <span class="archive-item-date">2025-01-27</span>
+        </article>
+    
+        
+
+        
+
+        <article class="archive-item">
             <a class="archive-item-link" href="/post/20250127131844.html">github部署Hexo博客categories出现404</a>
             <span class="archive-item-date">2025-01-27</span>
         </article>
@@ -176,15 +185,6 @@
             <span class="archive-item-date">2025-01-27</span>
         </article>
     
-        
-
-        
-
-        <article class="archive-item">
-            <a class="archive-item-link" href="/post/20250127001229.html">Centos-7安装高版本g++</a>
-            <span class="archive-item-date">2025-01-27</span>
-        </article>
-    
     
 </div>
             </div>
@@ -195,7 +195,6 @@
         <span>中国 · 杭州</span>
     </div>
 </footer>
-
     </div>
 </body>
 

@@ -1,43 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Centos-7安装高版本g++</title>
-    <url>/post/20250127001229.html</url>
-    <content><![CDATA[<h2 id="替换yum为阿里云"><a href="#替换yum为阿里云" class="headerlink" title="替换yum为阿里云"></a>替换yum为阿里云</h2><p>如果是纯净的Centos环境，需要先替换yum源</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装SCL源"><a href="#安装SCL源" class="headerlink" title="安装SCL源"></a>安装SCL源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y centos-release-scl</span><br></pre></td></tr></table></figure>
-
-<h2 id="替换SCL源"><a href="#替换SCL源" class="headerlink" title="替换SCL源"></a>替换SCL源</h2><p>CentOS-7的SCL源在2024.6.30日停止维护，<br>所以需要将SCL源里面的CentOS官方地址改为阿里云</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl.repo CentOS-SCLo-scl.repo.bak</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl-rh.repo CentOS-SCLo-scl-rh.repo.bak</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim CentOS-SCLo-rh.repo</span><br></pre></td></tr></table></figure>
-
-<p>粘贴以下内容</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[centos-sclo-rh]</span><br><span class="line">name=CentOS-7 - SCLo rh</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo</span><br></pre></td></tr></table></figure>
-
-<p>重新加载</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装devtoolset-11"><a href="#安装devtoolset-11" class="headerlink" title="安装devtoolset-11"></a>安装devtoolset-11</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y devtoolset-11-gcc*</span><br></pre></td></tr></table></figure>
-
-<h2 id="临时激活devtoolset"><a href="#临时激活devtoolset" class="headerlink" title="临时激活devtoolset"></a>临时激活devtoolset</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-11 bash</span><br></pre></td></tr></table></figure>
-
-<h2 id="永久激活软链接"><a href="#永久激活软链接" class="headerlink" title="永久激活软链接"></a>永久激活软链接</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/g++ /usr/bin/g++</span><br><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/gcc /usr/bin/gcc</span><br></pre></td></tr></table></figure>
-
-<h2 id="确认是否安装成功"><a href="#确认是否安装成功" class="headerlink" title="确认是否安装成功"></a>确认是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ -v</span><br></pre></td></tr></table></figure>
-
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在使用VSCode作为代码编辑器时，可能在<code>#include &lt;iostream&gt;</code>等头文件下方出现红色波浪线，<br>这是因为编辑器找不到g++的路径导致的。</p>
-<p>解决方法：<br>Mac: command + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入<br>Win: Ctrl + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Centos</category>
-      </categories>
-      <tags>
-        <tag>g++</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Centos-7安装高版本git</title>
     <url>/post/20250127122510.html</url>
     <content><![CDATA[<h2 id="移除旧版本"><a href="#移除旧版本" class="headerlink" title="移除旧版本"></a>移除旧版本</h2><p>如果没安装过git，这步可以省略</p>
@@ -77,13 +40,50 @@
       </tags>
   </entry>
   <entry>
-    <title>标签</title>
-    <url>/tag/index.html</url>
-    <content><![CDATA[]]></content>
+    <title>Centos-7安装高版本g++</title>
+    <url>/post/20250127195731.html</url>
+    <content><![CDATA[<h2 id="替换yum为阿里云"><a href="#替换yum为阿里云" class="headerlink" title="替换yum为阿里云"></a>替换yum为阿里云</h2><p>如果是纯净的Centos环境，需要先替换yum源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装SCL源"><a href="#安装SCL源" class="headerlink" title="安装SCL源"></a>安装SCL源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y centos-release-scl</span><br></pre></td></tr></table></figure>
+
+<h2 id="替换SCL源"><a href="#替换SCL源" class="headerlink" title="替换SCL源"></a>替换SCL源</h2><p>CentOS-7的SCL源在2024.6.30日停止维护，<br>所以需要将SCL源里面的CentOS官方地址改为阿里云</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl.repo CentOS-SCLo-scl.repo.bak</span><br><span class="line"><span class="built_in">mv</span> CentOS-SCLo-scl-rh.repo CentOS-SCLo-scl-rh.repo.bak</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim CentOS-SCLo-rh.repo</span><br></pre></td></tr></table></figure>
+
+<p>粘贴以下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[centos-sclo-rh]</span><br><span class="line">name=CentOS-7 - SCLo rh</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos/7/sclo/x86_64/rh/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo</span><br></pre></td></tr></table></figure>
+
+<p>重新加载</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装devtoolset-11"><a href="#安装devtoolset-11" class="headerlink" title="安装devtoolset-11"></a>安装devtoolset-11</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y devtoolset-11-gcc*</span><br></pre></td></tr></table></figure>
+
+<h2 id="临时激活devtoolset"><a href="#临时激活devtoolset" class="headerlink" title="临时激活devtoolset"></a>临时激活devtoolset</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scl <span class="built_in">enable</span> devtoolset-11 bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="永久激活软链接"><a href="#永久激活软链接" class="headerlink" title="永久激活软链接"></a>永久激活软链接</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/g++ /usr/bin/g++</span><br><span class="line"><span class="built_in">ln</span> -s /opt/rh/devtoolset-11/root/usr/bin/gcc /usr/bin/gcc</span><br></pre></td></tr></table></figure>
+
+<h2 id="确认是否安装成功"><a href="#确认是否安装成功" class="headerlink" title="确认是否安装成功"></a>确认是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">g++ -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在使用VSCode作为代码编辑器时，可能在<code>#include &lt;iostream&gt;</code>等头文件下方出现红色波浪线，<br>这是因为编辑器找不到g++的路径导致的。</p>
+<p>解决方法：<br>Mac: command + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入<br>Win: Ctrl + shift + p -&gt; C&#x2F;C++ configurations(UI) -&gt; compiler path处填入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/bin/g++</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Centos</category>
+      </categories>
+      <tags>
+        <tag>g++</tag>
+      </tags>
   </entry>
   <entry>
     <title>分类</title>
     <url>/category/index.html</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>标签</title>
+    <url>/tag/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
