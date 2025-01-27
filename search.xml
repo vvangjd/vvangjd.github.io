@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Centos-7安装高版本g++</title>
-    <url>/post/20250127122630.html</url>
+    <url>/post/20250127220958.html</url>
     <content><![CDATA[<h2 id="替换yum为阿里云"><a href="#替换yum为阿里云" class="headerlink" title="替换yum为阿里云"></a>替换yum为阿里云</h2><p>如果是纯净的Centos环境，需要先替换yum源</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
 
@@ -38,52 +38,13 @@
       </tags>
   </entry>
   <entry>
-    <title>github部署Hexo博客categories出现404</title>
-    <url>/post/20250127131844.html</url>
-    <content><![CDATA[<h2 id="问题及原因"><a href="#问题及原因" class="headerlink" title="问题及原因"></a>问题及原因</h2><p>原文：<br><a href="https://xhyangdali.github.io/2019/05/10/GitHub+Hexo%E5%8D%9A%E5%AE%A2categories%E5%87%BA%E7%8E%B0404/">https://xhyangdali.github.io/2019/05/10/GitHub+Hexo%E5%8D%9A%E5%AE%A2categories%E5%87%BA%E7%8E%B0404/</a></p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>Hexo本身是支持控制生成的文件名的大小写的，见Hexo的_config.yml中的参数filename_case。<br>只需将<code>filename_case: 1</code>即可。</p>
-<p>重新生成及部署<br>hexo clean &amp;&amp; hexo deploy</p>
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p>filename_case 是 Hexo 配置文件 _config.yml 中的一个选项，用于控制生成的文件名的大小写。</p>
-<ul>
-<li>0：保持文件名的原始大小写（默认值）</li>
-<li>1：将文件名转换为小写</li>
-<li>2：将文件名转换为大写</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>404</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Centos-7安装高版本git</title>
-    <url>/post/20250127122510.html</url>
-    <content><![CDATA[<h2 id="移除旧版本"><a href="#移除旧版本" class="headerlink" title="移除旧版本"></a>移除旧版本</h2><p>如果没安装过git，这步可以省略</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum remove git</span><br><span class="line">yum remove git-*</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装End-Point-Package-Repositor"><a href="#安装End-Point-Package-Repositor" class="headerlink" title="安装End Point Package Repositor"></a>安装End Point Package Repositor</h2><p>在CentOS 7上安装最新git最快的方法是通过End Point库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install https://packages.endpointdev.com/rhel/7/os/x86_64/endpoint-repo.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
-
-<h2 id="检查是否安装成功"><a href="#检查是否安装成功" class="headerlink" title="检查是否安装成功"></a>检查是否安装成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git -v</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Centos</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
+    <title>标签</title>
+    <url>/tag/index.html</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>分类</title>
     <url>/category/index.html</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>标签</title>
-    <url>/tag/index.html</url>
     <content><![CDATA[]]></content>
   </entry>
 </search>
